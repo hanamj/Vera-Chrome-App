@@ -1,0 +1,14 @@
+md-tabs[md-align-tabs=bottom] md-tabs-wrapper {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+}
+
+md-tabs {
+	height: 100%;
+}
+
+md-tabs[md-border-bottom]:not(.md-dynamic-height) md-tabs-content-wrapper {
+	top: 0px;
+	bottom: 144px;
+}
