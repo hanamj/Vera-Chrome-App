@@ -10,5 +10,21 @@ md-tabs {
 
 md-tabs[md-border-bottom]:not(.md-dynamic-height) md-tabs-content-wrapper {
 	top: 0px;
-	bottom: 144px;
+	bottom: 153px;
+}
+
+::-webkit-scrollbar
+{
+  width: 6px;  /* for vertical scrollbars */
+  height: 6px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.6);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.6);
 }
