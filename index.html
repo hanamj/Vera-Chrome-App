@@ -5,9 +5,6 @@
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-app="BlankApp" ng-cloak style="height: 100%">
-  <!--
-    Your HTML content here
-  -->  
   
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="lib/angular.min.js"></script>
@@ -21,7 +18,7 @@
   <!-- Your application bootstrap  -->
   <script src="js/app.js"></script>
 
-<md-toolbar ng-if="true" ng-controller="TitleController">
+<md-toolbar ng-if="true">
   <div class="md-toolbar-tools">
     <h3>
       <span>Title</span>
@@ -38,12 +35,13 @@
       </md-tab> -->
       <md-tab label="devices">
         <md-content class="">
-          <md-list-item class="md-2-line md-whiteframe-1dp" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]">
+          <md-list-item class="md-2-line md-whiteframe-1dp" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]" onclick="console.log()">
             <div class="md-list-item-text" style="padding-left: 10px">
               <h3>Appliance Device</h3>
-              <md-slider flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider>
+              <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> -->
             </div>
-            <md-switch class=""></md-switch>
+            <md-switch ng-if="(i%2)==0" class="md-secondary"></md-switch>
+            <md-progress-circular ng-if="(i%2)!=0" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
           </md-list-item>
         </md-content>
       </md-tab>
@@ -54,8 +52,8 @@
               <h3>Scene Number {{$index}}</h3>
               <p>Secondary text</p>
             </div>
-            <md-button ng-if="(i%2)==0" class="md-accent" ng-click="">RUN</md-button>
-            <md-progress-circular ng-if="(i%2)!=0" class="md-accent" md-mode="indeterminate" md-diameter="20px" style="margin-right: 43px; margin-top: 15px;"></md-progress-circular>
+            <md-button ng-if="(i%2)==0" class="md-secondary" style="border: 1px solid;">RUN</md-button>
+            <md-progress-circular ng-if="(i%2)!=0" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: 23px; margin-top: 5px;"></md-progress-circular>
           </md-list-item>
         </md-content>
       </md-tab>
