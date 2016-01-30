@@ -1,9 +1,8 @@
-angular.module('BlankApp', ['ngMaterial'])
+angular.module('VeraApp', ['ngMaterial', 'VeraApp.controllers', 'VeraApp.services'])
 
 .config(function($mdThemingProvider) {
   	$mdThemingProvider.theme('default')
   		.primaryPalette('blue-grey')
   		.warnPalette('orange')
     	.accentPalette('blue-grey')
-    console.log($mdThemingProvider.theme('default'))
 })

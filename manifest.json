@@ -7,6 +7,12 @@
     "16": "icon_16.png",
     "128": "icon_128.png"
   },
+  "permissions": [
+    "storage",
+    "https://sta1.mios.com/",
+    "https://fwd1.mios.com/",
+    "https://fwd2.mios.com/"
+  ],
   "app": {
     "background": {
       "scripts": ["main.js"]
