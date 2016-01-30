@@ -5,11 +5,12 @@ angular.module('VeraApp.controllers', [])
 	$scope.devices = {}
 	$scope.scenes = {}
 	$scope.rooms = {}
+	$scope.creds = {user: "", pass: ""}
 
 	Units.get().then(function (data) {
 		$scope.state = data.data.units[0]
-		console.log("Got State")
-		$scope.creds = {user: "", pass: ""}
+		console.log($scope.state)
+		
 
 		//Set password for now: chrome.storage.local.set({vpassword: "password", vusername: "hanamj"})
 		chrome.storage.local.get(["vpassword","vusername"], function (sdata) {

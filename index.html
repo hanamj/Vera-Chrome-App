@@ -23,7 +23,7 @@
 <md-toolbar ng-if="true">
   <div class="md-toolbar-tools">
     <h3>
-      <span>Title</span>
+      <span>{{state.name}}</span>
     </h3>
   </div>
 </md-toolbar>
@@ -42,7 +42,7 @@
               <h3>{{d.name}}</h3>
               <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> -->
             </div>
-            <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'"></md-switch>
+            <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'" aria-label="{{d.name}}"></md-switch>
             <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
           </md-list-item>
         </md-content>
