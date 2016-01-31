@@ -37,7 +37,7 @@
     <md-tabs class="md-primary" md-border-bottom md-align-tabs="bottom" md-stretch-tabs="always" style="height: 100%">
       <md-tab label="Devices">
         <div ng-repeat="d in devices">
-        <!--  -->
+          <!-- Appliances -->
           <md-card ng-if="d.category==3">
             <md-card-title>
               <md-card-title-text>
@@ -66,7 +66,7 @@
               </md-card-title-media>
             </md-card-title>
             <md-card-actions layout="row" layout-align="end center" style="margin-top: 30px; margin-bottom: 0px;">
-              <md-slider aria-label="{{d.name}}" flex min="0" max="100" ng-model="d.level" style="margin: 0px 50px;"></md-slider>
+              <md-slider aria-label="{{d.name}}" flex min="0" max="100" ng-model="d.level" style="margin: 0px 50px;" ng-change="changeDim(d)" ng-disabled="d.loading"></md-slider>
               <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'" aria-label="{{d.name}}"></md-switch>
               <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
             </md-card-actions>
@@ -102,30 +102,7 @@
 
         </div>
       </md-tab>
-<!--       <md-tab label="devices">
-        <div ng-repeat="d in devices">
-          <md-list-item class="md-2-line md-whiteframe-1dp" ng-click="console.log(d.name)" ng-if="d.category==3 || d.category==2">
-            <div class="md-list-item-text" style="padding-left: 10px">
-              <h3>{{d.name}}</h3>
-              <p>{{rooms[d.room]}}</p>
-              <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> --
-            </div>
-            <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'" aria-label="{{d.name}}"></md-switch>
-            <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
-          </md-list-item>
 
-          <md-list-item class="md-2-line secondary-button-padding md-whiteframe-1dp" ng-click="console.log(d.name)" ng-if="d.category==5">
-            <div class="md-list-item-text" style="padding-left: 10px">
-              <h3>{{d.name}}</h3>
-              <p>{{rooms[d.room]}}</p>
-              <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> --
-            </div>
-            <md-button class="md-secondary" ng-click="">Temp: {{d.temperature}}&deg;</md-button>
-            <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: 5px; margin-top: 15px;"></md-progress-circular>
-          </md-list-item>
-
-        </div>
-      </md-tab> -->
       <md-tab label="scenes">
         <md-content class="">
           <md-list-item class="md-2-line secondary-button-padding md-whiteframe-1dp" ng-repeat="s in scenes">

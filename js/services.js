@@ -14,6 +14,12 @@ angular.module('VeraApp.services', [])
     },
     setPower: function(fwd, unit, user, pass, did, state) {
 	    return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_action&serviceId=urn:upnp-org:serviceId:SwitchPower1&output_format=json&DeviceNum=' + did + '&action=SetTarget&newTargetValue=' + state);	
+    },
+    setLevel: function(fwd, unit, user, pass, did, level) {
+      return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_action&serviceId=urn:upnp-org:serviceId:Dimming1&output_format=json&DeviceNum=' + did + '&action=SetLoadLevelTarget&newLoadlevelTarget=' + level); 
+    },
+    getUpdates: function(fwd, unit, user, pass, timestamps) {
+      return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_sdata&loadtime=' + timestamps.loadtime + '&dataversion=' + timestamps.dataversion + '&timeout=5');
     }
   }
 })
