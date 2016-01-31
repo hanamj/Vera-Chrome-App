@@ -4,5 +4,5 @@ angular.module('VeraApp', ['ngMaterial', 'VeraApp.controllers', 'VeraApp.service
   	$mdThemingProvider.theme('default')
   		.primaryPalette('blue-grey')
   		.warnPalette('orange')
-    	.accentPalette('blue-grey')
+    	.accentPalette('green')
 })

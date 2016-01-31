@@ -28,3 +28,12 @@ md-tabs[md-border-bottom]:not(.md-dynamic-height) md-tabs-content-wrapper {
 {
   background: rgba(0, 0, 0, 0.6);
 }
+
+.thermometer-button {
+	margin: 0px 0px !important;
+}
+
+.thermometer-icon {
+	width: 16px;
+}
+

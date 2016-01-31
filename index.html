@@ -22,45 +22,123 @@
 
 <md-toolbar ng-if="true">
   <div class="md-toolbar-tools">
-    <h3>
+    <h2>
       <span>{{state.name}}</span>
-    </h3>
+    </h2>
+    <span flex></span>
+    <md-button class="md-fab md-mini" ng-hide="reloading" aria-label="Favorite" ng-click="init()">
+      <md-icon md-svg-icon="img/ic_refresh_24px.svg"></md-icon>
+    </md-button>
   </div>
 </md-toolbar>
-
+<md-content ng-show="reloading" class="">
+  <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="80px" style="margin: auto;"></md-progress-circular>
+</md-content>
     <md-tabs class="md-primary" md-border-bottom md-align-tabs="bottom" md-stretch-tabs="always" style="height: 100%">
-      <!-- <md-tab label="De">
-        <md-content class="md-padding">
-          
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-        </md-content>
-      </md-tab> -->
-      <md-tab label="devices">
-        <md-content class="">
-          <md-list-item class="md-2-line md-whiteframe-1dp" ng-repeat="d in devices" ng-click="console.log(d.name)" ng-if="d.category==3 || d.category==2">
+      <md-tab label="Devices">
+        <div ng-repeat="d in devices">
+        <!--  -->
+          <md-card ng-if="d.category==3">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{d.name}}</span>
+                <span class="md-subhead">{{rooms[d.room]}}</span>
+              </md-card-title-text>
+              <md-card-title-media>
+                <div class="md-media-sm card-media"><img src="img/cfl.svg" style="width: 24px; float:right;"></div>
+              </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'" aria-label="{{d.name}}"></md-switch>
+              <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
+            </md-card-actions>
+          </md-card>
+
+          <!-- DIMMABLES -->
+          <md-card ng-if="d.category==2">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{d.name}}</span>
+                <span class="md-subhead">{{rooms[d.room]}}</span>
+              </md-card-title-text>
+              <md-card-title-media>
+                <div class="md-media-sm card-media"><img src="img/lightbulb.svg" style="width: 32px; float:right;"></div>
+              </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center" style="margin-top: 30px; margin-bottom: 0px;">
+              <md-slider aria-label="{{d.name}}" flex min="0" max="100" ng-model="d.level" style="margin: 0px 50px;"></md-slider>
+              <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'" aria-label="{{d.name}}"></md-switch>
+              <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
+            </md-card-actions>
+          </md-card>
+
+          <!-- THERMOMETER -->
+          <md-card ng-if="d.category==5">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{d.name}}</span>
+                <span class="md-subhead">{{rooms[d.room]}}</span>
+                <span class="md-subhead"><strong>Mode:</strong> {{d.mode}}</span>
+                <span class="md-subhead"><strong>Status:</strong> {{d.hvacstate}}</span>
+              </md-card-title-text>
+              <md-card-title-media>
+                <div class="md-media-sm card-media">
+                  <img src="img/thermometer.png" style="width: 32px; float:right;">
+                  <h1 style="float:right; line-height: 0px; margin-right: 10px;">{{d.temperature}}&deg;</h1>
+                </div>
+              </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center" style="margin-top: 20px; margin-bottom: 0px;">
+              <h4 style="color: navy;">{{d.coolsp}}&deg;</h4>
+              <md-button class="md-icon-button thermometer-button"><md-icon class="thermometer-icon" md-svg-icon="img/plus.svg" aria-label="" style="color: navy;"></md-icon></md-button>
+              <md-button class="md-icon-button thermometer-button"><md-icon class="thermometer-icon" md-svg-icon="img/minus.svg" aria-label="" style="color: navy;"></md-icon></md-button>
+            </md-card-actions>
+            <md-card-actions layout="row" layout-align="end center" style="margin-top: -10px;">
+              <h4 style="color: red;">{{d.heatsp}}&deg;</h4>
+              <md-button class="md-icon-button thermometer-button"><md-icon class="thermometer-icon" md-svg-icon="img/plus.svg" aria-label="" style="color: red;"></md-icon></md-button>
+              <md-button class="md-icon-button thermometer-button"><md-icon class="thermometer-icon" md-svg-icon="img/minus.svg" aria-label="" style="color: red;"></md-icon></md-button>
+            </md-card-actions>
+          </md-card>
+
+        </div>
+      </md-tab>
+<!--       <md-tab label="devices">
+        <div ng-repeat="d in devices">
+          <md-list-item class="md-2-line md-whiteframe-1dp" ng-click="console.log(d.name)" ng-if="d.category==3 || d.category==2">
             <div class="md-list-item-text" style="padding-left: 10px">
               <h3>{{d.name}}</h3>
-              <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> -->
+              <p>{{rooms[d.room]}}</p>
+              <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> --
             </div>
             <md-switch ng-hide="d.loading" id="device_toggle_{{d.id}}" ng-change="toggleDevice(d)" class="md-secondary" ng-model="d.status" ng-true-value="'1'" ng-false-value="'0'" aria-label="{{d.name}}"></md-switch>
             <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: px; margin-top: 15px;"></md-progress-circular>
           </md-list-item>
-        </md-content>
-      </md-tab>
+
+          <md-list-item class="md-2-line secondary-button-padding md-whiteframe-1dp" ng-click="console.log(d.name)" ng-if="d.category==5">
+            <div class="md-list-item-text" style="padding-left: 10px">
+              <h3>{{d.name}}</h3>
+              <p>{{rooms[d.room]}}</p>
+              <!-- <md-slider md-miscrete flex min="0" max="100" step="10" style="margin: 0px 50px;"></md-slider> --
+            </div>
+            <md-button class="md-secondary" ng-click="">Temp: {{d.temperature}}&deg;</md-button>
+            <md-progress-circular ng-if="d.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: 5px; margin-top: 15px;"></md-progress-circular>
+          </md-list-item>
+
+        </div>
+      </md-tab> -->
       <md-tab label="scenes">
         <md-content class="">
           <md-list-item class="md-2-line secondary-button-padding md-whiteframe-1dp" ng-repeat="s in scenes">
             <div class="md-list-item-text" style="padding-left: 10px">
               <h3>{{s.name}}</h3>
+              <p>{{rooms[s.room]}}</p>
             </div>
-            <md-button ng-hide="s.loading" class="md-secondary" style="border: 1px solid;" ng-click="runScene(s)">RUN</md-button>
+            <md-button ng-hide="s.loading" class="md-secondary" style="border: 1px solid;" ng-click="runScene(s)" aria-label="RUN">RUN</md-button>
             <md-progress-circular ng-if="s.loading" class="md-warn" md-mode="indeterminate" md-diameter="40px" style="margin-right: 23px; margin-top: 5px;"></md-progress-circular>
           </md-list-item>
         </md-content>
       </md-tab>
     </md-tabs>
-
-
 </body>
 </html>
 
