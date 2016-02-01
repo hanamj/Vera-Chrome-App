@@ -1,25 +1,25 @@
 angular.module('VeraApp.services', [])
 
-.factory('Units', function($http) {
+.factory('Units', function($http, $rootScope) {
   return {
     get: function() {
       return $http.get('https://sta1.mios.com/locator_json.php');
     },
-    status: function(fwd, unit, user, pass) {
-      return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_sdata');
+    status: function() {
+      return $http.get('https://' + $rootScope.creds.server + '/' + $rootScope.creds.user + '/' + $rootScope.creds.pass + '/' + $rootScope.creds.unit + '/data_request?id=lu_sdata');
     },
-    runScene: function(fwd, unit, user, pass, id) {
+    runScene: function(id) {
     	//http://' + ip + ':3480/data_request?id=action&output_format=json&serviceId=urn:micasaverde-com:serviceId:HomeAutomationGateway1&action=RunScene&SceneNum=
-    	return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=action&output_format=json&serviceId=urn:micasaverde-com:serviceId:HomeAutomationGateway1&action=RunScene&SceneNum=' + id);
+    	return $http.get('https://' + $rootScope.creds.server + '/' + $rootScope.creds.user + '/' + $rootScope.creds.pass + '/' + $rootScope.creds.unit + '/data_request?id=action&output_format=json&serviceId=urn:micasaverde-com:serviceId:HomeAutomationGateway1&action=RunScene&SceneNum=' + id);
     },
-    setPower: function(fwd, unit, user, pass, did, state) {
-	    return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_action&serviceId=urn:upnp-org:serviceId:SwitchPower1&output_format=json&DeviceNum=' + did + '&action=SetTarget&newTargetValue=' + state);	
+    setPower: function(did, state) {
+	    return $http.get('https://' + $rootScope.creds.server + '/' + $rootScope.creds.user + '/' + $rootScope.creds.pass + '/' + $rootScope.creds.unit + '/data_request?id=lu_action&serviceId=urn:upnp-org:serviceId:SwitchPower1&output_format=json&DeviceNum=' + did + '&action=SetTarget&newTargetValue=' + state);	
     },
-    setLevel: function(fwd, unit, user, pass, did, level) {
-      return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_action&serviceId=urn:upnp-org:serviceId:Dimming1&output_format=json&DeviceNum=' + did + '&action=SetLoadLevelTarget&newLoadlevelTarget=' + level); 
+    setLevel: function(did, level) {
+      return $http.get('https://' + $rootScope.creds.server + '/' + $rootScope.creds.user + '/' + $rootScope.creds.pass + '/' + $rootScope.creds.unit + '/data_request?id=lu_action&serviceId=urn:upnp-org:serviceId:Dimming1&output_format=json&DeviceNum=' + did + '&action=SetLoadLevelTarget&newLoadlevelTarget=' + level); 
     },
-    getUpdates: function(fwd, unit, user, pass, timestamps) {
-      return $http.get('https://' + fwd + '/' + user + '/' + pass + '/' + unit + '/data_request?id=lu_sdata&loadtime=' + timestamps.loadtime + '&dataversion=' + timestamps.dataversion + '&timeout=5');
+    getUpdates: function(timestamps) {
+      return $http.get('https://' + $rootScope.creds.server + '/' + $rootScope.creds.user + '/' + $rootScope.creds.pass + '/' + $rootScope.creds.unit + '/data_request?id=lu_sdata&loadtime=' + timestamps.loadtime + '&dataversion=' + timestamps.dataversion + '&timeout=5');
     }
   }
 })
