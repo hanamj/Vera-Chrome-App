@@ -4,6 +4,7 @@ angular.module('VeraApp.controllers', [])
 	$rootScope.creds = {user: "", pass: "", server: "", unit: ""}
 
 	$scope.init = function () {
+		$scope.remote = 'R'
 		$scope.state = {}
 		$scope.devices = {}
 		$scope.scenes = {}

@@ -26,6 +26,7 @@
       <span>{{state.name}}</span>
     </h2>
     <span flex></span>
+    <md-switch ng-hide="reloading" ng-model="remote" aria-label="Connection Type" ng-true-value="'R'" ng-false-value="'L'">{{remote}}</md-switch>
     <md-button class="md-fab md-mini" ng-hide="reloading" aria-label="Favorite" ng-click="init()">
       <md-icon md-svg-icon="img/ic_refresh_24px.svg"></md-icon>
     </md-button>
