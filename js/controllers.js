@@ -1,6 +1,6 @@
 angular.module('VeraApp.controllers', [])
 
-.controller('mainApp', function($scope, Units, $timeout, $rootScope) {
+.controller('mainApp', function($scope, Units, $timeout, $rootScope, $mdDialog, $mdMedia) {
 	$rootScope.creds = {user: "", pass: "", server: "", unit: ""}
 
 	//
@@ -136,6 +136,23 @@ angular.module('VeraApp.controllers', [])
 		});
 	}
 
+	$scope.showSettings = function(ev) {
+    var useFullScreen = $mdMedia('xs');
+    $mdDialog.show({
+      controller: SettingsController,
+      templateUrl: 'settings.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:false,
+      fullscreen: useFullScreen
+    })
+    .then(function(data) {
+      console.log(data)
+    }, function() {
+      console.log('Settings Closed')
+    });
+  }
+
 	//Kick things off
 	$scope.init()
 
@@ -144,3 +161,13 @@ angular.module('VeraApp.controllers', [])
 		$scope.checkForUpdates()
 	}, 5000)
 })
+
+function SettingsController($scope, Units, $timeout, $rootScope, $mdDialog) {
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+  $scope.save = function() {
+    $mdDialog.hide("Data Here");
+  };
+}
+

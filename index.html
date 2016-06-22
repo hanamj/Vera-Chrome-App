@@ -25,18 +25,21 @@
     <h2>
       <span>{{state.name}}</span>
     </h2>
-    <md-button class="md-fab md-mini" ng-hide="reloading">
-      <md-icon md-svg-icon="img/ic_settings_24px.svg"></md-icon>
-    </md-button>
     <span flex></span>
     <md-button class="md-raised" ng-disabled="true" ng-hide="reloading" aria-label="Reload" ng-click="init()">
       {{remote}}
     </md-button>
-    <md-button class="md-fab md-mini" ng-hide="reloading" aria-label="Reload" ng-click="init()">
+    <md-button class="md-icon-button md-mini" ng-hide="reloading" ng-click="showSettings($event)">
+      <md-tooltip md-direction="bottom">Settings</md-tooltip>
+      <md-icon md-svg-icon="img/ic_settings_24px.svg"></md-icon>
+    </md-button>
+    <md-button class="md-icon-button md-mini" ng-hide="reloading" aria-label="Reload" ng-click="init()">
+      <md-tooltip md-direction="bottom">Full Refresh</md-tooltip>
       <md-icon md-svg-icon="img/ic_refresh_24px.svg"></md-icon>
     </md-button>
   </div>
 </md-toolbar>
+
 <md-content ng-show="reloading" class="">
   <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="80px" style="margin: auto;"></md-progress-circular>
 </md-content>
