@@ -3,8 +3,9 @@ angular.module('VeraApp.controllers', [])
 .controller('mainApp', function($scope, Units, $timeout, $rootScope) {
 	$rootScope.creds = {user: "", pass: "", server: "", unit: ""}
 
+	//
 	$scope.init = function () {
-		$scope.remote = 'R'
+		$scope.remote = 'Remote'
 		$scope.state = {}
 		$scope.devices = {}
 		$scope.scenes = {}
@@ -14,9 +15,10 @@ angular.module('VeraApp.controllers', [])
 
 		Units.get().then(function (data) {
 			$scope.reloading = true
-			$scope.state = data.data.units[0]
+			$scope.state = data.data.units[0] //TODO: Handle multiple units
 			$rootScope.creds.server = $scope.state.active_server
 			$rootScope.creds.unit = $scope.state.serialNumber
+			
 			console.log($scope.state)
 			
 			//Set password for now: chrome.storage.local.set({vpassword: "password", vusername: "hanamj"})
@@ -38,7 +40,6 @@ angular.module('VeraApp.controllers', [])
 	}
 
 	$scope.fullRefresh = function () {
-
 	}
 
 	$scope.runScene = function (s) {

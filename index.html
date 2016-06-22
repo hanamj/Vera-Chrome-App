@@ -25,9 +25,14 @@
     <h2>
       <span>{{state.name}}</span>
     </h2>
+    <md-button class="md-fab md-mini" ng-hide="reloading">
+      <md-icon md-svg-icon="img/ic_settings_24px.svg"></md-icon>
+    </md-button>
     <span flex></span>
-    <md-switch ng-hide="reloading" ng-model="remote" aria-label="Connection Type" ng-true-value="'R'" ng-false-value="'L'">{{remote}}</md-switch>
-    <md-button class="md-fab md-mini" ng-hide="reloading" aria-label="Favorite" ng-click="init()">
+    <md-button class="md-raised" ng-disabled="true" ng-hide="reloading" aria-label="Reload" ng-click="init()">
+      {{remote}}
+    </md-button>
+    <md-button class="md-fab md-mini" ng-hide="reloading" aria-label="Reload" ng-click="init()">
       <md-icon md-svg-icon="img/ic_refresh_24px.svg"></md-icon>
     </md-button>
   </div>

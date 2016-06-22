@@ -5,14 +5,18 @@
  * @see http://developer.chrome.com/apps/app.window.html
  */
 chrome.app.runtime.onLaunched.addListener(function() {
-  var width = 300;
+  var width = 400,
+      minWidth = 400,
+      minHeight = 300;
   chrome.app.window.create('index.html', {
     id: "vera",
     outerBounds: {
       width: width,
       height: screen.availHeight-200,
       left: Math.round((screen.availWidth-width)),
-      top: Math.round(100)
+      top: Math.round(100),
+      minWidth: minWidth,
+      minHeight: minHeight
     }
   });
 });
